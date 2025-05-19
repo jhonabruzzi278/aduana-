@@ -1,18 +1,18 @@
-export function showToast(message: string, type: 'success' | 'error' | 'info' | 'warning' = 'success') {
-  const existing = document.getElementById("toast");
-  if (existing) existing.remove();
+export function showToast(message: string, type: 'success' | 'error' | 'info') {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const bgColor = {
+    success: 'bg-green-600',
+    error: 'bg-red-600',
+    info: 'bg-blue-600'
+  };
 
   const toast = document.createElement("div");
-  toast.id = "toast";
-  toast.className = `fixed bottom-6 right-6 px-6 py-4 rounded shadow-lg text-white z-50
-    ${type === 'success' ? 'bg-green-600' : ''}
-    ${type === 'error' ? 'bg-red-600' : ''}
-    ${type === 'info' ? 'bg-blue-600' : ''}
-    ${type === 'warning' ? 'bg-yellow-500 text-black' : ''}
-    animate-fade-in`;
+  toast.className = `text-white px-4 py-2 rounded shadow ${bgColor[type]} animate-fade-in-out`;
   toast.textContent = message;
 
-  document.body.appendChild(toast);
+  container.appendChild(toast);
 
   setTimeout(() => toast.remove(), 4000);
 }

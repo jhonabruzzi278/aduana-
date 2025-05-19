@@ -5,14 +5,24 @@ import "../styles/global.css";
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Login Simulado</title>
+    <title>Sistema Aduanero - Inicio</title>
   </head>
-  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm text-center">
+  <body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center px-4 py-8">
+
+    <section class="w-full max-w-xl text-center mb-8">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">
+        Bienvenido al Sistema Aduanero
+      </h1>
+      <p class="text-base sm:text-lg lg:text-xl text-gray-700">
+        Selecciona tu tipo de usuario para comenzar tu trámite o gestionar procesos fronterizos.
+      </p>
+    </section>
+
+    <section class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm text-center">
       <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
            alt="Google" class="mx-auto mb-6 h-12" />
 
-      <h1 class="text-xl font-bold mb-4">Simula tu acceso con Google</h1>
+      <h2 class="text-xl font-bold mb-4">Acceso Simulado con Google</h2>
 
       <form id="login-form" class="space-y-4">
         <input
@@ -30,9 +40,9 @@ import "../styles/global.css";
       </form>
 
       <p id="error" class="text-red-600 mt-4 font-medium hidden">
-        ❌ Rol no válido.
+        ❌ Rol no válido. Usa: admin, turista o funcionario
       </p>
-    </div>
+    </section>
 
     <script type="module">
       const form = document.getElementById("login-form");
@@ -45,7 +55,7 @@ import "../styles/global.css";
 
         if (["admin", "turista", "funcionario"].includes(rol)) {
           localStorage.setItem("rol", rol);
-          window.location.href = `/${rol}`; 
+          window.location.href = `/${rol}`;
         } else {
           error.classList.remove("hidden");
         }

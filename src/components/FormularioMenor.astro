@@ -32,7 +32,9 @@
 </section>
 
 <script type="module">
-  import { setupFormularioMenor } from "/src/scripts/formularioMenor.ts";
-  setupFormularioMenor();
-</script>
+  import { setupFormularioMenor } from "../scripts/formularioMenor.ts";
 
+  window.addEventListener("DOMContentLoaded", () => {
+    setupFormularioMenor();
+  });
+</script>
