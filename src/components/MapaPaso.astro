@@ -1,0 +1,14 @@
+---
+const GOOGLE_MAPS_KEY = import.meta.env.GOOGLE_MAPS_KEY;
+---
+
+<section class="my-6 bg-white p-4 rounded shadow">
+  <h3 class="text-lg font-semibold mb-4">📍 Paso Los Libertadores</h3>
+  <div id="map" class="w-full h-96 rounded"></div>
+</section>
+
+<script type="module">
+  import { loadGoogleMapsScript } from "/src/scripts/initMap.ts";
+  const key = "{GOOGLE_MAPS_KEY}";
+  loadGoogleMapsScript(key);
+</script>

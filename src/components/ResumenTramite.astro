@@ -1,0 +1,68 @@
+---
+---
+<section class="my-6 bg-white p-4 rounded shadow">
+  <h3 class="text-lg font-semibold mb-4">📈 Reportes y Estadísticas</h3>
+
+  <div id="reporte-contenido">
+    <p class="text-gray-600">Cargando datos de trámites...</p>
+  </div>
+
+  <script type="module">
+    import { obtenerTramites } from "../scripts/storage.ts";
+
+    const tramites = obtenerTramites();
+    const container = document.getElementById("reporte-contenido");
+
+    if (!tramites || tramites.length === 0) {
+      container.innerHTML = "<p class='text-gray-600'>No hay registros disponibles.</p>";
+    } else {
+      const conteos = {
+        pasajero: tramites.filter(t => t.tipo === "pasajero_ingreso").length,
+        salida: tramites.filter(t => t.tipo === "pasajero_salida").length,
+        vehiculo: tramites.filter(t => t.tipo === "vehiculo").length,
+        menor: tramites.filter(t => t.tipo === "documentacion_menor").length,
+      };
+
+      container.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+          <div class="bg-blue-50 p-4 rounded shadow text-center">
+            <p class="text-sm font-medium text-blue-700">👤 Ingresos de Pasajeros</p>
+            <p class="text-3xl font-bold text-blue-800">${conteos.pasajero}</p>
+          </div>
+          <div class="bg-green-50 p-4 rounded shadow text-center">
+            <p class="text-sm font-medium text-green-700">🚪 Salidas de Pasajeros</p>
+            <p class="text-3xl font-bold text-green-800">${conteos.salida}</p>
+          </div>
+          <div class="bg-yellow-50 p-4 rounded shadow text-center">
+            <p class="text-sm font-medium text-yellow-700">🚗 Vehículos Registrados</p>
+            <p class="text-3xl font-bold text-yellow-700">${conteos.vehiculo}</p>
+          </div>
+          <div class="bg-purple-50 p-4 rounded shadow text-center">
+            <p class="text-sm font-medium text-purple-700">👶 Menores Declarados</p>
+            <p class="text-3xl font-bold text-purple-800">${conteos.menor}</p>
+          </div>
+        </div>
+
+        <h4 class="text-lg font-semibold mb-2">🗂 Detalle de Trámites</h4>
+        <table class="w-full text-sm border border-gray-300 mt-2">
+          <thead class="bg-gray-100">
+            <tr>
+              <th class="border px-2 py-1">Tipo</th>
+              <th class="border px-2 py-1">Fecha</th>
+              <th class="border px-2 py-1">Datos</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${tramites.map(t => `
+              <tr>
+                <td class="border px-2 py-1">${t.tipo}</td>
+                <td class="border px-2 py-1">${t.fecha.split(",")[0]}</td>
+                <td class="border px-2 py-1 whitespace-pre-wrap">${JSON.stringify(t.datos, null, 2)}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+  </script>
+</section>

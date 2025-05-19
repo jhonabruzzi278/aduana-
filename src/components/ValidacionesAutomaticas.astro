@@ -1,0 +1,55 @@
+---
+---
+
+<section class="my-6 bg-white p-4 rounded shadow">
+  <h3 class="text-lg font-semibold mb-4">🧠 Validaciones Automáticas</h3>
+
+  <form id="form-validacion" class="space-y-4">
+    <div>
+      <label for="codigo-validacion" class="block font-medium">Código de Trámite o Documento</label>
+      <input id="codigo-validacion" type="text" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600">
+      Ejecutar Validación
+    </button>
+  </form>
+
+  <div id="resultado-validacion" class="mt-6 text-lg font-semibold"></div>
+</section>
+
+<script type="module">
+  import { showToast } from "/src/scripts/toast.ts";
+
+  const form = document.getElementById("form-validacion");
+  const input = document.getElementById("codigo-validacion");
+  const resultado = document.getElementById("resultado-validacion");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const codigo = input.value.trim();
+    if (!codigo) {
+      showToast("Debes ingresar un código válido", "error");
+      return;
+    }
+
+    // Simulación aleatoria de validación
+    const estados = ["Aprobado", "Observado", "Rechazado"];
+    const random = Math.floor(Math.random() * estados.length);
+    const estado = estados[random];
+
+    if (resultado) {
+      if (estado === "Aprobado") {
+        resultado.innerHTML = `<span class="text-green-600">✅ Trámite ${codigo} ha sido <strong>Aprobado</strong>.</span>`;
+      } else if (estado === "Observado") {
+        resultado.innerHTML = `<span class="text-yellow-600">⚠️ Trámite ${codigo} fue <strong>Observado</strong>: falta verificación de documento.</span>`;
+      } else {
+        resultado.innerHTML = `<span class="text-red-600">❌ Trámite ${codigo} fue <strong>Rechazado</strong>: antecedentes no válidos.</span>`;
+      }
+
+      showToast(`Resultado: ${estado}`, estado === "Aprobado" ? "success" : estado === "Observado" ? "warning" : "error");
+    }
+
+    form.reset();
+  });
+</script>

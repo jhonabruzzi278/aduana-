@@ -1,16 +1,55 @@
 ---
-
+import "../styles/global.css";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login Simulado</title>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm text-center">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+           alt="Google" class="mx-auto mb-6 h-12" />
+
+      <h1 class="text-xl font-bold mb-4">Simula tu acceso con Google</h1>
+
+      <form id="login-form" class="space-y-4">
+        <input
+          id="rol"
+          type="text"
+          placeholder="Escribe: admin, turista o funcionario"
+          class="w-full p-2 border border-gray-300 rounded"
+        />
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 w-full"
+        >
+          Iniciar sesión
+        </button>
+      </form>
+
+      <p id="error" class="text-red-600 mt-4 font-medium hidden">
+        ❌ Rol no válido.
+      </p>
+    </div>
+
+    <script type="module">
+      const form = document.getElementById("login-form");
+      const rolInput = document.getElementById("rol");
+      const error = document.getElementById("error");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const rol = rolInput.value.toLowerCase().trim();
+
+        if (["admin", "turista", "funcionario"].includes(rol)) {
+          localStorage.setItem("rol", rol);
+          window.location.href = `/${rol}`; 
+        } else {
+          error.classList.remove("hidden");
+        }
+      });
+    </script>
+  </body>
 </html>

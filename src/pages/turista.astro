@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormularioVehiculo from '../components/FormularioVehiculo.astro';
+import FormularioMenor from '../components/FormularioMenor.astro';
+import FormularioConsultaTramite from '../components/FormularioConsultaTramite.astro';
+import MapaPaso from '../components/MapaPaso.astro';
+import FormularioSAG from '../components/IntegracionSAG.astro';
+import IntegracionSAG from '../components/IntegracionSAG.astro';
+---
+
+<BaseLayout title="Turista - Pre-registro">
+  <h2 class="text-xl font-semibold mb-4">Bienvenido Turista</h2>
+  <p class="mb-6">Puedes adelantar tu trámite registrando tu vehículo, documentación o consultando tu estado.</p>
+
+  <FormularioConsultaTramite />
+  <FormularioVehiculo />
+  <FormularioMenor />
+  <IntegracionSAG />
+  <MapaPaso />
+
+</BaseLayout>
+
+<script type="module">
+  window.onload = () => {
+    const rolEsperado = "turista";
+    const actual = localStorage.getItem("rol");
+
+    if (actual !== rolEsperado) {
+      window.location.href = "/turista";
+    }
+  };
+</script>
