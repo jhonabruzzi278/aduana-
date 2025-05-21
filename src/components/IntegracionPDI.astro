@@ -7,21 +7,22 @@
   <p id="resultado-pdi" class="mt-4 font-semibold"></p>
 </section>
 
+
 <script type="module">
-  const form = document.getElementById("form-pdi");
-  const resultado = document.getElementById("resultado-pdi");
-
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const doc = document.getElementById("doc-pdi").value.trim();
-    if (!doc) {
-      resultado.textContent = "❌ Ingresa el documento del pasajero.";
-      resultado.className = "text-red-600";
-      return;
-    }
-
-    const estados = ["✅ Sin antecedentes", "❌ Alerta activa en PDI"];
-    resultado.textContent = estados[Math.floor(Math.random() * estados.length)];
-    resultado.className = "text-blue-700 mt-4 font-semibold";
+  
+  window.addEventListener("DOMContentLoaded", () => {
+    
+    import("../scripts/formularioIntegracionPDI.js")
+      .then((module) => {
+        
+        if (module.setupIntegracionPDI) {
+          module.setupIntegracionPDI();
+        } else {
+          console.warn("El módulo formularioIntegracionPDI.js no exporta 'setupIntegracionPDI'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioIntegracionPDI.js:", error);
+      });
   });
 </script>

@@ -1,11 +1,9 @@
----
----
-
 <section class="my-6 bg-white p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-4">Registrar Ingreso de Vehículo</h3>
+  <h3 class="text-lg font-semibold mb-4">Registro de Vehículo</h3>
+
   <form id="form-vehiculo" class="space-y-4">
     <div>
-      <label for="placa" class="block font-medium">Placa Patente</label>
+      <label for="placa" class="block font-medium">Placa</label>
       <input id="placa" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
     <div>
@@ -16,13 +14,28 @@
       <label for="modelo" class="block font-medium">Modelo</label>
       <input id="modelo" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
-    <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-500">Registrar Vehículo</button>
+    <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-500 w-full">
+      Registrar vehículo
+    </button>
   </form>
-  <p id="resultado-vehiculo" class="mt-4 font-semibold"></p>
 </section>
 
-<script type="module">
-  import { setupFormularioVehiculo } from "/src/scripts/formularioVehiculo.ts";
-  setupFormularioVehiculo();
-</script>
 
+<script type="module">
+ 
+  window.addEventListener("DOMContentLoaded", () => {
+    
+    import("../scripts/formularioVehiculo.js")
+      .then((module) => {
+        
+        if (module.setupFormularioVehiculo) {
+          module.setupFormularioVehiculo();
+        } else {
+          console.warn("El módulo formularioVehiculo.js no exporta 'setupFormularioVehiculo'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioVehiculo.js:", error);
+      });
+  });
+</script>

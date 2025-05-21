@@ -1,45 +1,41 @@
----
-const enviarFormulario = (event: Event) => {
-  event.preventDefault();
-  const form = event.target as HTMLFormElement;
-  const nombre = (form.querySelector('#nombre') as HTMLInputElement).value;
-  const documento = (form.querySelector('#documento') as HTMLInputElement).value;
-  const nacionalidad = (form.querySelector('#nacionalidad') as HTMLInputElement).value;
-
-  const resultado = document.getElementById('resultado-pasajero');
-  if (nombre && documento && nacionalidad) {
-    resultado!.textContent = `✅ Pasajero registrado: ${nombre} (${documento}, ${nacionalidad})`;
-    resultado!.classList.remove("text-red-500");
-    resultado!.classList.add("text-green-600");
-    form.reset();
-  } else {
-    resultado!.textContent = "❌ Debes completar todos los campos.";
-    resultado!.classList.remove("text-green-600");
-    resultado!.classList.add("text-red-500");
-  }
-};
----
 <section class="my-6 bg-white p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-4">Registrar Ingreso de Pasajero</h3>
+  <h3 class="text-lg font-semibold mb-4">Ingreso de Pasajero</h3>
+
   <form id="form-pasajero" class="space-y-4">
     <div>
       <label for="nombre" class="block font-medium">Nombre completo</label>
       <input id="nombre" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
     <div>
-      <label for="documento" class="block font-medium">Documento de Identidad</label>
+      <label for="documento" class="block font-medium">Documento</label>
       <input id="documento" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
     <div>
       <label for="nacionalidad" class="block font-medium">Nacionalidad</label>
       <input id="nacionalidad" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
-    <button type="submit" class="bg-blue-800 text-white px-4 py-2 rounded hover:bg-blue-700">Registrar</button>
+    <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-600 w-full">
+      Registrar ingreso
+    </button>
   </form>
-  <p id="resultado-pasajero" class="mt-4 font-semibold"></p>
 </section>
 
+
 <script type="module">
-  import { setupFormularioPasajeroEntrada } from "/src/scripts/formularioPasajeroEntrada.ts";
-  setupFormularioPasajeroEntrada();
+ 
+  window.addEventListener("DOMContentLoaded", () => {
+   
+    import("../scripts/formularioPasajero.js")
+      .then((module) => {
+        
+        if (module.setupFormulario) {
+          module.setupFormulario();
+        } else {
+          console.warn("El módulo formularioPasajero.js no exporta 'setupFormulario'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioPasajero.js:", error);
+      });
+  });
 </script>

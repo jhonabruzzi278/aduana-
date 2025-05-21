@@ -1,70 +1,37 @@
----
----
-
 <section class="my-6 bg-white p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-4">Integración: Declaración SAG</h3>
+  <h3 class="text-lg font-semibold mb-4">Integración: SAG - Declaración de Productos</h3>
 
-  <!-- Checkbox que controla si se debe mostrar el formulario -->
-  <label class="flex items-center gap-2 mb-4">
-    <input type="checkbox" id="lleva-productos" class="accent-green-600 w-4 h-4" />
-    <span class="text-sm font-medium text-gray-700">¿Lleva productos animales o vegetales?</span>
-  </label>
+  <form id="form-sag" class="space-y-4">
+    <div>
+      <label for="producto" class="block font-medium">Producto declarado</label>
+      <input id="producto" type="text" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <div>
+      <label for="origen" class="block font-medium">País de origen</label>
+      <input id="origen" type="text" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-500 w-full">
+      Validar Producto
+    </button>
+  </form>
+  <p id="resultado-sag" class="mt-4 font-semibold"></p> </section>
 
-  <!-- Formulario que se muestra solo si checkbox está activo -->
-  <div id="formulario-sag" class="hidden">
-    <form id="form-sag" class="space-y-4">
-      <input
-        type="text"
-        id="producto"
-        class="w-full p-2 border border-gray-300 rounded"
-        placeholder="Producto (ej: carne, fruta)" />
-      <input
-        type="text"
-        id="origen"
-        class="w-full p-2 border border-gray-300 rounded"
-        placeholder="País de origen" />
-      <button
-        type="submit"
-        class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-600">
-        Validar Producto
-      </button>
-    </form>
-    <p id="resultado-sag" class="mt-4 font-semibold"></p>
-  </div>
-</section>
 
 <script type="module">
-  const checkbox = document.getElementById("lleva-productos");
-  const container = document.getElementById("formulario-sag");
-  const form = document.getElementById("form-sag");
-  const resultado = document.getElementById("resultado-sag");
-
-  // Mostrar/ocultar el formulario según el checkbox
-  checkbox?.addEventListener("change", () => {
-    if (checkbox.checked) {
-      container?.classList.remove("hidden");
-    } else {
-      container?.classList.add("hidden");
-      resultado.textContent = "";
-    }
-  });
-
-  // Validación simulada
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const producto = document.getElementById("producto").value.trim();
-    const origen = document.getElementById("origen").value.trim();
-
-    if (!producto || !origen) {
-      resultado.textContent = "❌ Debes completar ambos campos.";
-      resultado.className = "text-red-600";
-      return;
-    }
-
-    const estados = ["✅ Aprobado para ingresar", "❌ Rechazado por riesgo agrícola"];
-    const estado = estados[Math.floor(Math.random() * estados.length)];
-
-    resultado.textContent = estado;
-    resultado.className = estado.includes("Aprobado") ? "text-green-700 mt-4 font-semibold" : "text-red-600 mt-4 font-semibold";
+  
+  window.addEventListener("DOMContentLoaded", () => {
+    
+    import("../scripts/formularioIntegracionSAG.js")
+      .then((module) => {
+        
+        if (module.setupIntegracionSAG) {
+          module.setupIntegracionSAG();
+        } else {
+          console.warn("El módulo formularioIntegracionSAG.js no exporta 'setupIntegracionSAG'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioIntegracionSAG.js:", error);
+      });
   });
 </script>

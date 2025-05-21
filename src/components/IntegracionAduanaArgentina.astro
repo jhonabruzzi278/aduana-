@@ -8,20 +8,20 @@
 </section>
 
 <script type="module">
-  const form = document.getElementById("form-aduana-arg");
-  const resultado = document.getElementById("resultado-aduana");
-
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const patente = document.getElementById("patente").value.trim();
-    if (!patente) {
-      resultado.textContent = "❌ Ingresa la patente del vehículo.";
-      resultado.className = "text-red-600";
-      return;
-    }
-
-    const estados = ["✅ Documento válido reconocido por Chile", "❌ Documento no válido o vencido"];
-    resultado.textContent = estados[Math.floor(Math.random() * estados.length)];
-    resultado.className = "text-orange-700 mt-4 font-semibold";
+  
+  window.addEventListener("DOMContentLoaded", () => {
+   
+    import("../scripts/formularioIntegracionAduanaArgentina.js")
+      .then((module) => {
+       
+        if (module.setupIntegracionAduanaArgentina) {
+          module.setupIntegracionAduanaArgentina();
+        } else {
+          console.warn("El módulo formularioIntegracionAduanaArgentina.js no exporta 'setupIntegracionAduanaArgentina'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioIntegracionAduanaArgentina.js:", error);
+      });
   });
 </script>

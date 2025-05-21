@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",            // ✅ clave: ESNext (no commonjs)
+    "moduleResolution": "node",
+    "outDir": "public/scripts",
+    "strict": false,
+    "esModuleInterop": true,
+    "allowJs": false
+  },
+  "include": ["src/scripts/**/*.ts"]
+}

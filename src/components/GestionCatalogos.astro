@@ -1,29 +1,47 @@
----
----
-
 <section class="my-6 bg-white p-4 rounded shadow">
   <h3 class="text-lg font-semibold mb-4">⚙️ Administración de Catálogos</h3>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     <div>
       <h4 class="font-medium mb-2">Tipos de Documento</h4>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mb-2">
+      <ul id="lista-tipos-documento" class="list-disc pl-5 text-sm text-gray-700 mb-2">
         <li>Pasaporte</li>
         <li>Cédula de Identidad</li>
         <li>Permiso Notarial</li>
       </ul>
-      <input type="text" placeholder="Nuevo tipo..." class="w-full p-2 border border-gray-300 rounded mb-2" />
-      <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-500">Agregar</button>
+      <input id="input-tipo-documento" type="text" placeholder="Nuevo tipo..." class="w-full p-2 border border-gray-300 rounded mb-2" />
+      <button id="btn-agregar-tipo-documento" class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-500">Agregar</button>
     </div>
     <div>
       <h4 class="font-medium mb-2">Puestos Fronterizos</h4>
-      <ul class="list-disc pl-5 text-sm text-gray-700 mb-2">
+      <ul id="lista-puestos-frontera" class="list-disc pl-5 text-sm text-gray-700 mb-2">
         <li>Los Libertadores</li>
         <li>Chacalluta</li>
         <li>Colchane</li>
       </ul>
-      <input type="text" placeholder="Nuevo puesto..." class="w-full p-2 border border-gray-300 rounded mb-2" />
-      <button class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-500">Agregar</button>
+      <input id="input-puesto-frontera" type="text" placeholder="Nuevo puesto..." class="w-full p-2 border border-gray-300 rounded mb-2" />
+      <button id="btn-agregar-puesto-frontera" class="bg-green-600 text-white px-4 py-1 rounded hover:bg-green-500">Agregar</button>
     </div>
   </div>
 </section>
+
+
+<script type="module">
+  // Espera a que el DOM esté completamente cargado antes de intentar importar el script
+  window.addEventListener("DOMContentLoaded", () => {
+    // Importación dinámica del script.
+    // La ruta es relativa al componente actual y apunta al archivo .js que Astro generará.
+    import("../scripts/gestionCatalogos.js")
+      .then((module) => {
+        // Asegúrate de que el módulo exporte la función 'setupGestionCatalogos'
+        if (module.setupGestionCatalogos) {
+          module.setupGestionCatalogos();
+        } else {
+          console.warn("El módulo gestionCatalogos.js no exporta 'setupGestionCatalogos'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script gestionCatalogos.js:", error);
+      });
+  });
+</script>

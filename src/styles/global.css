@@ -6,5 +6,5 @@
   100% { opacity: 0; transform: translateY(-10px); }
 }
 .animate-fade-in-out {
-  animation: fade-in-out 4s ease-in-out;
+  animation: fade-in-out 3s ease-in-out;
 }

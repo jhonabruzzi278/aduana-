@@ -1,74 +1,77 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-import FormularioPasajero from '../components/FormularioPasajero.astro';
-import FormularioSalidaPasajero from '../components/FormularioSalidaPasajero.astro';
-import FormularioVehiculo from '../components/FormularioVehiculo.astro';
-import IntervencionTramite from '../components/IntervencionTramite.astro';
-import ValidacionesAutomaticas from '../components/ValidacionesAutomaticas.astro';
-import IntegracionSAG from '../components/IntegracionSAG.astro';
-import IntegracionPDI from '../components/IntegracionPDI.astro';
-import IntegracionMigraciones from '../components/IntegracionMigraciones.astro';
-import IntegracionAduanaArgentina from '../components/IntegracionAduanaArgentina.astro';
+import FormularioPasajero from "../components/FormularioPasajero.astro";
+import FormularioSalidaPasajero from "../components/FormularioSalidaPasajero.astro";
+import FormularioVehiculo from "../components/FormularioVehiculo.astro";
+import FormularioMenor from "../components/FormularioMenor.astro";
+import ValidacionesAutomaticas from "../components/ValidacionesAutomaticas.astro";
+import IntegracionPDI from "../components/IntegracionPDI.astro";
+import IntegracionSAG from "../components/IntegracionSAG.astro";
+import IntegracionMigraciones from "../components/IntegracionMigraciones.astro";
+import IntegracionAduanaArgentina from "../components/IntegracionAduanaArgentina.astro";
+import IntervencionTramite from "../components/IntervencionTramite.astro";
+import MapaPaso from "../components/MapaPaso.astro";
 ---
 
 <BaseLayout title="Funcionario - Aduana">
-  <h2 class="text-2xl font-bold mb-6">👮 Panel del Funcionario</h2>
-  <p class="mb-8 text-gray-700">Gestiona trámites de ingreso, salida, validaciones y conexiones externas desde aquí.</p>
+  <h2 class="text-2xl font-bold mb-2 text-blue-900">Bienvenido Funcionario</h2>
+  <p class="mb-6 text-gray-700">Gestione ingresos, salidas e intervenciones sobre los trámites.</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    
-    <!-- Bloque 1: Ingreso -->
-    <section class="bg-blue-50 p-4 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-lg font-semibold text-blue-800 mb-2">📥 Registro de Ingreso</h3>
+  <!-- 🧩 Grid estilo Bento -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
       <FormularioPasajero />
-    </section>
-
-    <!-- Bloque 2: Vehículo -->
-    <section class="bg-yellow-50 p-4 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-lg font-semibold text-yellow-700 mb-2">🚗 Registro de Vehículo</h3>
-      <FormularioVehiculo />
-    </section>
-
-    <!-- Bloque 3: Salida -->
-    <section class="bg-green-50 p-4 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-lg font-semibold text-green-800 mb-2">🚪 Registro de Salida</h3>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
       <FormularioSalidaPasajero />
-    </section>
-
-    <!-- Bloque 4: Validaciones automáticas -->
-    <section class="bg-indigo-50 p-4 rounded-lg shadow hover:shadow-md transition">
-      <h3 class="text-lg font-semibold text-indigo-800 mb-2">🧠 Validaciones Automáticas</h3>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <FormularioVehiculo />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <FormularioMenor />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
       <ValidacionesAutomaticas />
-    </section>
-
-    <!-- Bloque 5: Intervención -->
-    <section class="bg-red-50 p-4 rounded-lg shadow hover:shadow-md transition col-span-1 md:col-span-2">
-      <h3 class="text-lg font-semibold text-red-800 mb-2">🛠️ Intervención Manual</h3>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
       <IntervencionTramite />
-    </section>
-
-    <!-- Bloque 6: Integraciones Externas -->
-    <section class="bg-gray-100 p-4 rounded-lg shadow hover:shadow-md transition col-span-1 md:col-span-2">
-      <h3 class="text-lg font-semibold text-gray-800 mb-4">🌐 Integraciones Externas</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <IntegracionPDI />
-        <IntegracionSAG />
-        <IntegracionMigraciones />
-        <IntegracionAduanaArgentina />
-      </div>
-    </section>
-
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <IntegracionPDI />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <IntegracionSAG />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <IntegracionMigraciones />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <IntegracionAduanaArgentina />
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition col-span-full">
+      <MapaPaso />
+    </div>
   </div>
 </BaseLayout>
 
+<!-- 🔐 Validación de rol + carga de scripts JS -->
 <script type="module">
-  window.onload = () => {
+  window.addEventListener("DOMContentLoaded", () => {
     const rolEsperado = "funcionario";
     const actual = localStorage.getItem("rol");
 
     if (actual !== rolEsperado) {
-      window.location.href = "/";
+      window.location.href = "/funcionario";
+      return;
     }
-  };
+
+    import("/scripts/formularioPasajeroEntrada.js").then((m) => m.setupFormulario());
+    import("/scripts/formularioPasajeroSalida.js").then((m) => m.setupFormulario());
+    import("/scripts/formularioVehiculo.js").then((m) => m.setupFormulario());
+    import("/scripts/formularioMenor.js").then((m) => m.setupFormularioMenor());
+    import("/scripts/formularioIntervencion.js").then((m) => m.setupFormulario());
+    import("/scripts/formularioIntegracionSAG.js").then((m) => m.setupFormulario());
+  });
 </script>

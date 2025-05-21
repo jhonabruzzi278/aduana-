@@ -8,22 +8,22 @@
   <p id="resultado-migraciones" class="mt-4 font-semibold"></p>
 </section>
 
+
 <script type="module">
-  const form = document.getElementById("form-migraciones");
-  const resultado = document.getElementById("resultado-migraciones");
-
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const nombre = document.getElementById("nombre-migra").value.trim();
-    const nac = document.getElementById("nacionalidad-migra").value.trim();
-    if (!nombre || !nac) {
-      resultado.textContent = "❌ Completa ambos campos.";
-      resultado.className = "text-red-600";
-      return;
-    }
-
-    const estados = ["✅ Cruce migratorio válido", "❌ Ingreso no registrado en Argentina"];
-    resultado.textContent = estados[Math.floor(Math.random() * estados.length)];
-    resultado.className = "text-purple-700 mt-4 font-semibold";
+ 
+  window.addEventListener("DOMContentLoaded", () => {
+    
+    import("../scripts/formularioIntegracionMigraciones.js")
+      .then((module) => {
+        
+        if (module.setupIntegracionMigraciones) {
+          module.setupIntegracionMigraciones();
+        } else {
+          console.warn("El módulo formularioIntegracionMigraciones.js no exporta 'setupIntegracionMigraciones'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioIntegracionMigraciones.js:", error);
+      });
   });
 </script>

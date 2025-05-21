@@ -1,35 +1,36 @@
----
----
-
 <section class="my-6 bg-white p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-4">🛂 Intervención Manual de Trámite</h3>
+  <h3 class="text-lg font-semibold mb-4">Intervención Manual</h3>
 
   <form id="form-intervencion" class="space-y-4">
     <div>
-      <label for="codigo-tramite" class="block font-medium">Código de Trámite</label>
+      <label for="codigo-tramite" class="block font-medium">Código de trámite</label>
       <input id="codigo-tramite" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
-
     <div>
-      <label for="estado-validacion" class="block font-medium">Resultado de Validación</label>
-      <select id="estado-validacion" class="w-full p-2 border border-gray-300 rounded">
-        <option value="">Seleccionar</option>
-        <option value="Aprobado">Aprobado</option>
-        <option value="Observado">Observado</option>
-        <option value="Rechazado">Rechazado</option>
-      </select>
+      <label for="accion" class="block font-medium">Justificación / Acción tomada</label>
+      <textarea id="accion" rows="3" class="w-full p-2 border border-gray-300 rounded"></textarea>
     </div>
-
-    <div>
-      <label for="justificacion" class="block font-medium">Justificación</label>
-      <textarea id="justificacion" rows="4" class="w-full p-2 border border-gray-300 rounded"></textarea>
-    </div>
-
-    <button type="submit" class="bg-indigo-700 text-white px-4 py-2 rounded hover:bg-indigo-600">Registrar Intervención</button>
+    <button type="submit" class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-600 w-full">
+      Registrar intervención
+    </button>
   </form>
 </section>
 
+
 <script type="module">
-  import { setupIntervencionTramite } from "/src/scripts/formularioIntervencion.ts";
-  setupIntervencionTramite();
+ 
+  window.addEventListener("DOMContentLoaded", () => {
+   
+    import("../scripts/formularioIntervencionManual.js")
+      .then((module) => {
+        if (module.setupIntervencionManual) {
+          module.setupIntervencionManual();
+        } else {
+          console.warn("El módulo formularioIntervencionManual.js no exporta 'setupIntervencionManual'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioIntervencionManual.js:", error);
+      });
+  });
 </script>

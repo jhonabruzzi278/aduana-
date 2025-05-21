@@ -1,19 +1,33 @@
----
----
-
 <section class="my-6 bg-white p-4 rounded shadow">
-  <h3 class="text-lg font-semibold mb-4">Registrar Salida de Pasajero</h3>
+  <h3 class="text-lg font-semibold mb-4">Salida de Pasajero</h3>
+
   <form id="form-salida" class="space-y-4">
     <div>
-      <label for="documento-salida" class="block font-medium">Documento de Identidad</label>
+      <label for="documento-salida" class="block font-medium">Documento del pasajero</label>
       <input id="documento-salida" type="text" class="w-full p-2 border border-gray-300 rounded" />
     </div>
-    <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600">Registrar Salida</button>
+    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 w-full">
+      Registrar salida
+    </button>
   </form>
-  <p id="resultado-salida" class="mt-4 font-semibold"></p>
 </section>
 
+
 <script type="module">
-  import { setupFormularioPasajeroSalida } from "/src/scripts/formularioPasajeroSalida.ts";
-  setupFormularioPasajeroSalida();
+  
+  window.addEventListener("DOMContentLoaded", () => {
+   
+    import("../scripts/formularioPasajeroSalida.js")
+      .then((module) => {
+        
+        if (module.setupFormularioSalida) {
+          module.setupFormularioSalida();
+        } else {
+          console.warn("El módulo formularioPasajeroSalida.js no exporta 'setupFormularioSalida'.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al cargar el script formularioPasajeroSalida.js:", error);
+      });
+  });
 </script>
