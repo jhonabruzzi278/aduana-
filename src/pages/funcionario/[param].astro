@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import FormularioPasajero from "../../components/FormularioPasajero.astro";
+import FormularioSalidaPasajero from "../../components/FormularioSalidaPasajero.astro";
+import FormularioVehiculo from "../../components/FormularioVehiculo.astro";
+import FormularioMenor from "../../components/FormularioMenor.astro";
+import ValidacionesAutomaticas from "../../components/ValidacionesAutomaticas.astro";
+import IntervencionTramite from "../../components/IntervencionTramite.astro";
+import FormularioMascota from "../../components/FormularioMascota.astro";
+import IntegracionSAG from "../../components/IntegracionSAG.astro";
+import IntegracionPDI from "../../components/IntegracionPDI.astro";
+import IntegracionMigraciones from "../../components/IntegracionMigraciones.astro";
+import IntegracionAduanaArgentina from "../../components/IntegracionAduanaArgentina.astro";
+
+
+const { param } = Astro.params;
+
+export const getStaticPaths = () => {
+  return [
+    { params: { param: "pasajero" } },
+    { params: { param: "salida" } },
+    { params: { param: "vehiculo" } },
+    { params: { param: "menor" } },
+    { params: { param: "validaciones" } },
+    { params: { param: "intervencion" } },
+    { params: { param: "mascota" } },
+    { params: { param: "sag" } },
+    { params: { param: "pdi" } },
+    { params: { param: "migraciones" } },
+    { params: { param: "aduana" } }
+  ];
+};
+---
+
+<BaseLayout title={`Sección: ${param}`}>
+  <h2 class="text-xl font-semibold mb-4 capitalize">Formulario de {param}</h2>
+
+  {
+    param === "pasajero" ? <FormularioPasajero /> :
+    param === "salida" ? <FormularioSalidaPasajero /> :
+    param === "vehiculo" ? <FormularioVehiculo /> :
+    param === "menor" ? <FormularioMenor /> :
+    param === "validaciones" ? <ValidacionesAutomaticas /> :
+    param === "intervencion" ? <IntervencionTramite /> :
+    param === "mascota" ? <FormularioMascota  /> :
+    param === "validaciones" ? <ValidacionesAutomaticas /> :
+    param === "intervencion" ? <IntervencionTramite /> :
+    param === "sag" ? <IntegracionSAG /> :
+    param === "pdi" ? <IntegracionPDI /> :
+    param === "migraciones" ? <IntegracionMigraciones /> :
+    param === "aduana" ? <IntegracionAduanaArgentina /> :
+
+    <p class="text-red-600 font-semibold">❌ No existe esta sección.</p>
+  }
+</BaseLayout>

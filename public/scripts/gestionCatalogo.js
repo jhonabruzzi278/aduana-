@@ -1,6 +1,6 @@
 import { showToast } from '/scripts/toast.js';
 const CATALOGOS_KEY = 'catalogos_aduana.js';
-// Función para obtener los catálogos de localStorage
+
 function getCatalogos() {
     try {
         const stored = localStorage.getItem(CATALOGOS_KEY);
@@ -11,7 +11,7 @@ function getCatalogos() {
         return { tiposDocumento: [], puestosFronterizos: [] };
     }
 }
-// Función para guardar los catálogos en localStorage
+
 function saveCatalogos(catalogos) {
     try {
         localStorage.setItem(CATALOGOS_KEY, JSON.stringify(catalogos));
@@ -21,13 +21,13 @@ function saveCatalogos(catalogos) {
         showToast('Error al guardar catálogos. Intenta de nuevo.', 'error');
     }
 }
-// Función para renderizar las listas de catálogos en la UI
+
 function renderCatalogos() {
     const catalogos = getCatalogos();
     const listaTiposDocumento = document.getElementById('lista-tipos-documento');
     const listaPuestosFrontera = document.getElementById('lista-puestos-frontera');
     if (listaTiposDocumento) {
-        listaTiposDocumento.innerHTML = ''; // Limpiar antes de renderizar
+        listaTiposDocumento.innerHTML = ''; 
         catalogos.tiposDocumento.forEach(item => {
             const li = document.createElement('li');
             li.textContent = item;

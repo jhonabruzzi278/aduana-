@@ -31,7 +31,7 @@
   window.addEventListener("DOMContentLoaded", () => {
     // Importación dinámica del script.
     // La ruta es relativa al componente actual y apunta al archivo .js que Astro generará.
-    import("../scripts/gestionCatalogos.js")
+    import("/scripts/gestionCatalogos.js")
       .then((module) => {
         // Asegúrate de que el módulo exporte la función 'setupGestionCatalogos'
         if (module.setupGestionCatalogos) {

@@ -6,22 +6,19 @@
   </div>
 </section>
 
-
 <script type="module">
-  
   window.addEventListener("DOMContentLoaded", () => {
-   
-    import("../scripts/resumenTramites.js")
+    import("/scripts/resumenTramites.js")
       .then((module) => {
-        
         if (module.setupResumenTramites) {
           module.setupResumenTramites();
         } else {
-          console.warn("El módulo resumenTramites.js no exporta 'setupResumenTramites'.");
+          console.warn("El módulo no exporta 'setupResumenTramites'");
         }
       })
-      .catch((error) => {
-        console.error("Error al cargar el script resumenTramites.js:", error);
+      .catch((err) => {
+        console.error("No se pudo cargar resumenTramites.js", err);
       });
   });
 </script>
+

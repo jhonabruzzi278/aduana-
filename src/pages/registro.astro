@@ -1,0 +1,85 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario</title>
+  </head>
+  <body class="bg-gradient-to-r from-blue-900 to-blue-700 min-h-screen flex items-center justify-center px-4">
+
+    <div class="bg-white shadow-lg rounded-xl w-full max-w-md p-8 space-y-6">
+      <div class="text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/2917/2917990.png" alt="Logo Aduana" class="w-16 mx-auto mb-4" />
+        <h1 class="text-2xl font-bold text-gray-800">Registro de Usuario</h1>
+        <p class="text-sm text-gray-500">Completa el formulario para crear tu cuenta ficticia</p>
+      </div>
+
+      <form id="registro-form" class="space-y-4">
+        <div>
+          <label for="rut" class="block text-sm font-medium text-gray-700">RUT</label>
+          <input id="rut" type="text" placeholder="Ej: 12345678-9" class="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-300" />
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <input id="password" type="password" class="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-300" />
+        </div>
+
+        <div>
+          <label for="rol" class="block text-sm font-medium text-gray-700">Tipo de usuario</label>
+          <select id="rol" class="w-full p-2 border border-gray-300 rounded">
+            <option value="">Seleccionar</option>
+            <option value="turista">Turista</option>
+            <option value="funcionario">Funcionario</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full bg-blue-700 text-white font-semibold py-2 rounded hover:bg-blue-800 transition">
+          Registrarse
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-gray-500">
+        ¿Ya tienes una cuenta? 
+        <a href="/" class="text-blue-600 hover:underline">Volver al login</a>
+      </p>
+
+      <p id="mensaje" class="text-green-600 text-center hidden font-medium mt-2">✅ Usuario registrado. Redirigiendo...</p>
+    </div>
+
+    <script type="module">
+      const form = document.getElementById("registro-form");
+      const rutInput = document.getElementById("rut");
+      const passInput = document.getElementById("password");
+      const rolSelect = document.getElementById("rol");
+      const mensaje = document.getElementById("mensaje");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const rut = rutInput.value.trim();
+        const pass = passInput.value.trim();
+        const rol = rolSelect.value;
+
+        if (!rut || !pass || !rol) {
+          alert("❌ Todos los campos son obligatorios.");
+          return;
+        }
+
+        // Simulación ficticia: guardar en localStorage como base temporal
+        const users = JSON.parse(localStorage.getItem("usuarios") || "{}");
+        users[rut] = { pass, rol };
+        localStorage.setItem("usuarios", JSON.stringify(users));
+
+        mensaje.classList.remove("hidden");
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

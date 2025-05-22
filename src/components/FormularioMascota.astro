@@ -1,0 +1,31 @@
+<section class="my-6 bg-white p-4 rounded shadow">
+  <h3 class="text-lg font-semibold mb-4">🐾 Información de Mascota</h3>
+
+  <form id="form-mascota" class="space-y-4">
+    <div>
+      <label for="nombre" class="block font-medium">Nombre de la mascota</label>
+      <input id="nombre" type="text" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <div>
+      <label for="especie" class="block font-medium">Especie</label>
+      <input id="especie" type="text" placeholder="Ej: perro, gato" class="w-full p-2 border border-gray-300 rounded" />
+    </div>
+    <div>
+      <label for="vacunas" class="block font-medium">¿Tiene vacunas al día?</label>
+      <select id="vacunas" class="w-full p-2 border border-gray-300 rounded">
+        <option value="">Seleccionar</option>
+        <option>Sí</option>
+        <option>No</option>
+      </select>
+    </div>
+    <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-500 w-full">Registrar Mascota</button>
+  </form>
+</section>
+
+<div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+<script type="module">
+  window.addEventListener("DOMContentLoaded", () => {
+    import("/scripts/formularioMascota.js").then((m) => m.setupFormularioMascota());
+  });
+</script>

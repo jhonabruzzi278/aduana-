@@ -1,28 +1,78 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-import FormularioConsultaTramite from "../components/FormularioConsultaTramite.astro";
-import FormularioVehiculo from "../components/FormularioVehiculo.astro";
-import FormularioMenor from "../components/FormularioMenor.astro";
-import MapaPaso from "../components/MapaPaso.astro";
 ---
 
-<BaseLayout title="Turista - Pre-registro">
-  <h2 class="text-xl font-semibold mb-4">Bienvenido Turista</h2>
-  <p class="mb-6">
-    Puedes adelantar tu trámite registrando tu vehículo, documentación o consultando tu estado.
-  </p>
+<BaseLayout title="Dashboard Turista">
+  <section class="mb-8">
+    <h2 class="text-3xl font-bold text-blue-900 mb-2">Bienvenido Turista</h2>
+    <p class="text-gray-700">Desde aquí puedes pre-registrar información antes de cruzar la frontera.</p>
+  </section>
 
-  <FormularioConsultaTramite />
-  <FormularioVehiculo />
-  <FormularioMenor />
-  <MapaPaso />
+  <section class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Registro de Vehículo -->
+    <a href="/turista/vehiculo" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-blue-700">🚗</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Registrar Vehículo</h3>
+          <p class="text-sm text-gray-600">Agrega los datos de tu auto antes de llegar.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Registro de Mascota -->
+    <a href="/turista/mascota" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-green-700">🐾</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Registrar Mascota</h3>
+          <p class="text-sm text-gray-600">Declara tu mascota y su estado sanitario.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Registro de Menor -->
+    <a href="/turista/menor" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-yellow-700">👶</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Registrar Menor</h3>
+          <p class="text-sm text-gray-600">Completa la documentación necesaria si viajas con un menor.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Declaración de Productos (SAG) -->
+    <a href="/turista/productos" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-red-600">🌽</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Declarar Productos</h3>
+          <p class="text-sm text-gray-600">SAG: Declara alimentos o productos agrícolas.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Consulta de Trámite -->
+    <a href="/turista/consulta" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-purple-700">📄</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Consultar Trámite</h3>
+          <p class="text-sm text-gray-600">Verifica el estado de tu pre-registro con el código.</p>
+        </div>
+      </div>
+    </a>
+
+    <!-- Ubicación del Paso Fronterizo -->
+    <a href="/turista/mapa" class="block p-6 bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
+      <div class="flex items-center gap-4">
+        <div class="text-3xl text-indigo-700">🗺️</div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800">Ubicación Paso</h3>
+          <p class="text-sm text-gray-600">Ver el mapa del paso Los Libertadores.</p>
+        </div>
+      </div>
+    </a>
+  </section>
 </BaseLayout>
-
-<script type="module">
-  window.addEventListener("DOMContentLoaded", () => {
-    import("/scripts/formularioConsultaTramite.js").then((m) => m.setupFormulario());
-    import("/scripts/formularioVehiculo.js").then((m) => m.setupFormulario());
-    import("/scripts/formularioMenor.js").then((m) => m.setupFormularioMenor());
-  });
-</script>

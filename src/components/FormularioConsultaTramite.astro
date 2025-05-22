@@ -1,5 +1,6 @@
 <section class="my-6 bg-white p-4 rounded shadow">
   <h3 class="text-lg font-semibold mb-4">Consulta de Trámite</h3>
+  <a href="/src/pages/turista/">Volver al inicio </a>
 
   <form id="form-consulta" class="space-y-4">
     <div>
@@ -17,7 +18,7 @@
  
   window.addEventListener("DOMContentLoaded", () => {
    
-    import("../scripts/formularioConsultaTramite.js")
+    import("/scripts/formularioConsultaTramite.js")
       .then((module) => {
         
         if (module.setupFormulario) {
