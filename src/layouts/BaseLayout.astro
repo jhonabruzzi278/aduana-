@@ -1,6 +1,7 @@
 ---
 const { title = "Sistema Aduanero" } = Astro.props;
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 ---
 
 <html lang="es">
@@ -8,6 +9,7 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <ClientRouter />
   </head>
   <body class="bg-gray-100 text-gray-800">
     <header class="bg-blue-900 text-white py-4 text-center">
