@@ -9,8 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.0",
     "@tailwindcss/vite": "^4.1.7",
-    "astro": "^5.7.13"
+    "astro": "^5.7.13",
+    "postgres": "^3.4.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

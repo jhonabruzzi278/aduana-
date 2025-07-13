@@ -1,70 +1,46 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
 import "../styles/global.css";
 ---
+<BaseLayout title="Bienvenido al Sistema Aduanero">
+  <Hero />
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ingreso al Sistema Aduanero</title>
-  </head>
-  <body class="bg-gradient-to-r from-blue-900 to-blue-700 min-h-screen flex items-center justify-center px-4">
-
-    <div class="bg-white shadow-lg rounded-xl w-full max-w-md p-8 space-y-6">
-      <div class="text-center">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="google" class="w-16 mx-auto mb-4" />
-        <h1 class="text-2xl font-bold text-gray-800">Sistema Aduanero Fronterizo</h1>
-        <p class="text-sm text-gray-500">Ingreso seguro para funcionarios y ciudadanos</p>
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800">Procedimientos Clave para Turistas</h2>
+        <p class="text-gray-600 mt-2">Prepárate para tu viaje con estos sencillos pasos.</p>
       </div>
 
-      <form id="login-form" class="space-y-4">
-        <div>
-          <label for="rut" class="block text-sm font-medium text-gray-700">RUT</label>
-          <input id="rut" type="text" placeholder="Ej: 12345678-9" class="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-300" />
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <!-- Card 1 -->
+        <div class="p-8 border border-gray-200 rounded-lg">
+          <div class="flex items-center justify-center h-16 w-16 bg-blue-100 text-blue-600 rounded-full mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Declaración Jurada</h3>
+          <p class="text-gray-600">Completa tu declaración de forma digital antes de llegar a la frontera para agilizar tu ingreso.</p>
         </div>
 
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input id="password" type="password" class="w-full p-2 border border-gray-300 rounded focus:ring focus:ring-blue-300" />
+        <!-- Card 2 -->
+        <div class="p-8 border border-gray-200 rounded-lg">
+          <div class="flex items-center justify-center h-16 w-16 bg-blue-100 text-blue-600 rounded-full mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Pago de Impuestos</h3>
+          <p class="text-gray-600">Consulta y paga los impuestos correspondientes a tus mercancías de manera online y segura.</p>
         </div>
 
-        <button type="submit" class="w-full bg-blue-700 text-white font-semibold py-2 rounded hover:bg-blue-800 transition">Iniciar sesión</button>
-      </form>
-
-      <p class="text-center text-sm text-gray-500">
-        ¿No tienes una cuenta? 
-        <a href="/registro" class="text-blue-600 hover:underline">Regístrate aquí</a>
-      </p>
-
-      <p id="error" class="text-red-600 font-semibold text-center hidden">❌ RUT o contraseña inválidos.</p>
+        <!-- Card 3 -->
+        <div class="p-8 border border-gray-200 rounded-lg">
+          <div class="flex items-center justify-center h-16 w-16 bg-blue-100 text-blue-600 rounded-full mx-auto mb-4">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Consulta de Trámite</h3>
+          <p class="text-gray-600">Una vez iniciado, puedes seguir el estado de tu trámite en tiempo real desde nuestro portal.</p>
+        </div>
+      </div>
     </div>
-
-    <script type="module">
-      const form = document.getElementById("login-form");
-      const rutInput = document.getElementById("rut");
-      const passwordInput = document.getElementById("password");
-      const error = document.getElementById("error");
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const rut = rutInput.value.trim();
-        const password = passwordInput.value.trim();
-
-        // Simulación ficticia
-        const usuarios = {
-          "12345": { rol: "admin", pass: "admin123" },
-          "11111": { rol: "funcionario", pass: "fun123" },
-          "22222": { rol: "turista", pass: "tur123" },
-        };
-
-        if (usuarios[rut] && usuarios[rut].pass === password) {
-          localStorage.setItem("rol", usuarios[rut].rol);
-          window.location.href = `/${usuarios[rut].rol}`;
-        } else {
-          error.classList.remove("hidden");
-        }
-      });
-    </script>
-  </body>
-</html>
+  </section>
+</BaseLayout>

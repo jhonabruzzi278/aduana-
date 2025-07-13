@@ -1,51 +1,21 @@
 ---
-const { title = "Sistema Aduanero" } = Astro.props;
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
----
 
+const { title } = Astro.props;
+---
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <ClientRouter />
+    <title>{title || 'Sistema Aduanero Fronterizo'}</title>
   </head>
-  <body class="bg-gray-100 text-gray-800">
-    <header class="bg-blue-900 text-white py-4 text-center">
-      <h1 class="text-2xl font-bold">Sistema Aduanero Paso Los Libertadores</h1>
-    </header>
-
-    <!-- Barra de sesión -->
-    <div id="barra-sesion" class="fixed top-4 right-4 z-50"></div>
-
-    <main class="max-w-4xl mx-auto px-4 py-6">
+  <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-grow">
       <slot />
     </main>
-
-    <footer class="text-center py-4 text-sm text-gray-500">
-      &copy; 2025 Sistema Aduanero Los Libertadores
-    </footer>
-
-    <!-- Script para mostrar barra de sesión y logout -->
-    <script type="module">
-      const rol = localStorage.getItem("rol");
-      const barra = document.getElementById("barra-sesion");
-
-      if (rol && barra) {
-        barra.innerHTML = `
-          <div class="bg-gray-800 text-white px-4 py-2 rounded shadow text-sm flex gap-4 items-center">
-            👤 <span>Rol: <strong>${rol}</strong></span>
-            <button id="logout" class="bg-red-500 px-2 py-1 rounded hover:bg-red-400">Cerrar sesión</button>
-          </div>
-        `;
-
-        document.getElementById("logout")?.addEventListener("click", () => {
-          localStorage.removeItem("rol");
-          window.location.href = "/";
-        });
-      }
-    </script>
-    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+    <Footer />
   </body>
 </html>
